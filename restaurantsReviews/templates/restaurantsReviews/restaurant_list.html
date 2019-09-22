@@ -1,0 +1,30 @@
+{% extends "restaurantsReviews/base.html" %}
+
+{% block content %}
+    <h3>Restaurants List</h3>
+    
+    <ul>
+    {% for restaurant in lates_restaurant_list %}
+        <li>
+            <a href="{% url 'restaurantsReviews:restaurant_detial' restaurant.id %}">
+                {{ restaurant.name }}
+            </a>
+        </li>
+        {% empty %}<li>Sorry, there are no comments for restaurants.</li>
+    {% endfor %}
+    </ul>
+
+    {% if request.user.is_authenticated %}
+        <p>
+            <span class="glyphicon glyphicon-plus"></span>
+            <a href="{% url 'restaurantsReviews:restaurant_create' %}">Add Restaurant</a>
+        </p>
+    {% else %}
+        <p>
+            Please <a href="{% url 'account_login' %}?next={% url 'restaurantsReviews:restaurant_create' %}">log in first, </a>
+            then add restaurant.
+        </p>
+    {% endif %}
+        
+
+{% endblock %}

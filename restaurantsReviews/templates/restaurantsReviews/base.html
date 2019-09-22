@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Restaurants Reviews {% endblock %}</title>
+    <meta name="keywords" content="{% block keywords %} some keywords{% endblock %} ">
+    <meta name="description" content="{% block description %} Django web application example.{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body class="bs-docs-home">
+<nav class="navbar navbar-inverse navbar-static-top bs-docs-nav">
+ <div class="container">
+     <div class="navbar-header">
+         <button type="button" clas="navbar-toggle" data-toggle="collagpse" data-target="#myNavbar">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+     </button>
+         <a class="navbar-brand" href="#"><strong>Restaurant Reviews</strong></a>
+     </div>
+ </div>
+
+ <div class="collapse navbar-collapse" id="myNavbar">
+     <ul class="nav navbar-nav navbar-right">
+         {% if request.user.is_authenticated %}
+             <li class="dropdown">
+                 <a class="dropdown-toggle btn-green" data-toggle="dropdown" href="#">
+                     <span class="glyphicon glyphicon-user"></span>
+                     {{ request.user.username }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'myaccount:profile' %}">My Profile</a></li>
+                    <li><a href="'{% url 'account_logout' %}"></a></li>
+                </ul>
+             </li>
+         {% else %}
+             <li clas="dropdown">
+                <a class="dropdown-toggle btn-green" href="'{% url 'account_signup' %}">
+                    <span class="glyphicon glyphicon-user"></span> Sign up
+                </a>
+             </li>
+             <li clas="dropdown">
+                <a class="dropdown-toggle btn-green" href="'{% url 'account_login' %}">
+                    <span class="glyphicon glyphicon-user"></span> Sign on
+                </a>
+             </li>
+         {% endif %}
+     </ul>
+
+ </div>
+</nav>
+
+<main id="section1" class="contianer_fluid">
+    <div class="contianer">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="newsbox">
+                    <div class="container1">
+                        {% block content %}
+                            {% if error_message %}
+                                <p><strong>{{ error_message }}</strong></p>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+  {% block footer %}{% endblock %}
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

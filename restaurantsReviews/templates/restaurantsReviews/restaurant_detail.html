@@ -1,0 +1,61 @@
+{% extends "restaurantsReviews/base.html" %}
+
+{% block content %}
+    <h3>
+        {{ restaurant.name }}
+        {% if request.user == restaurant.user %}
+            (<a href="{% url 'restaurantsReviews:restaurant_edit' restaurant.id %}">Edit Restaurant</a>
+        {% endif %}
+    </h3>
+
+    <h4>Address</h4>
+
+    <p>
+        {{ restaurant.address }}, <br>
+        {{ restaurant.phone }}
+    </p>
+
+    <h4>Menu
+        {% if request.user.is_authenticated %}
+            (<a href="{% url 'restaurantsReviews:dish_create' restaurant.id %}">Add Dish</a>
+        {% endif %}
+    </h4>
+
+    <ul>
+        {% for dish in restaurant.dishes.all %}
+            <li>
+                <a href="{% url 'restaurantsReviews:dish_detail' restaurant.id dish.id %}">
+                    {{ dish.name }}</a> - ${{ dish.price }}
+            </li>
+            {% empty %}<li>Sorry, the resturant hasn't add any dish.</li>
+        {% endfor %}
+
+    </ul>
+
+    <h4>Comments
+    {% if restaurant.review.all %}
+        {% for review in restaurant.review.all %}
+            <p>{{ review.rating }} Star, {{ review.user }} said, {{ review.date |date: "Y-m-d" }}</p>
+        {% endfor %}
+    {% else %}
+        <p>There is no comment to this restaurant yet.</p>
+    {% endif %}
+
+    <h4>Add Comment</h4>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'restaurantsReviews:review_create' restaurant.id %}" method="post">
+            {% csrf_token %}
+            <p>Comment</p>
+            <p>
+                {% for rate in RATING_CHOICE %}
+                    <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" />
+                    <label for="choice{{ forloop.counter }}">{{ rate.0 }}Star</label>
+                    <br>
+                {% endfor %}
+            </p>
+            <input type="submit" value="Submit"/>
+        </form>
+    {% endif %}
+    </h4>
+
+{% endblock %}
