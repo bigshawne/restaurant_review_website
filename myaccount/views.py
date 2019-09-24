@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.template.loader import render_to_string
 from .models import UserProfile
 from .forms import ProfileForm
 from django.http import HttpResponseRedirect

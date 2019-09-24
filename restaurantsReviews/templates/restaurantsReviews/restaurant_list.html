@@ -4,13 +4,13 @@
     <h3>Restaurants List</h3>
     
     <ul>
-    {% for restaurant in lates_restaurant_list %}
+    {% for restaurant in latest_restaurant_list %}
         <li>
-            <a href="{% url 'restaurantsReviews:restaurant_detial' restaurant.id %}">
+            <a href="{% url 'restaurantsReviews:restaurant_detail' restaurant.id %}">
                 {{ restaurant.name }}
             </a>
         </li>
-        {% empty %}<li>Sorry, there are no comments for restaurants.</li>
+        {% empty %}<li>Sorry, there is no restaurant.</li>
     {% endfor %}
     </ul>
 

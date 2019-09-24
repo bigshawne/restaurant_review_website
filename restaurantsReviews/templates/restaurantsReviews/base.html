@@ -5,23 +5,25 @@
     <title>{% block title %} Restaurants Reviews {% endblock %}</title>
     <meta name="keywords" content="{% block keywords %} some keywords{% endblock %} ">
     <meta name="description" content="{% block description %} Django web application example.{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=2">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body class="bs-docs-home">
 <nav class="navbar navbar-inverse navbar-static-top bs-docs-nav">
  <div class="container">
      <div class="navbar-header">
+         <!--
          <button type="button" clas="navbar-toggle" data-toggle="collagpse" data-target="#myNavbar">
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-     </button>
-         <a class="navbar-brand" href="#"><strong>Restaurant Reviews</strong></a>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </button>
+         -->
+         <a class="navbar-brand" href="{% url 'restaurantsReviews:restaurant_list' %}"><strong>Restaurant Reviews</strong></a>
      </div>
  </div>
 
- <div class="collapse navbar-collapse" id="myNavbar">
+ <div class="collapse navbar-collapse ex1" id="myNavbar">
      <ul class="nav navbar-nav navbar-right">
          {% if request.user.is_authenticated %}
              <li class="dropdown">
@@ -30,18 +32,18 @@
                      {{ request.user.username }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'myaccount:profile' %}">My Profile</a></li>
-                    <li><a href="'{% url 'account_logout' %}"></a></li>
+                    <li><a href="'{% url 'account_logout' %}">Log out</a></li>
                 </ul>
              </li>
          {% else %}
              <li clas="dropdown">
                 <a class="dropdown-toggle btn-green" href="'{% url 'account_signup' %}">
-                    <span class="glyphicon glyphicon-user"></span> Sign up
+                    <span class="glyphicon glyphicon-user"></span> Register
                 </a>
              </li>
              <li clas="dropdown">
                 <a class="dropdown-toggle btn-green" href="'{% url 'account_login' %}">
-                    <span class="glyphicon glyphicon-user"></span> Sign on
+                    <span class="glyphicon glyphicon-user"></span> Log in
                 </a>
              </li>
          {% endif %}
@@ -51,7 +53,7 @@
 </nav>
 
 <main id="section1" class="contianer_fluid">
-    <div class="contianer">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="newsbox">
@@ -69,7 +71,9 @@
 </main>
 
 <footer class="footer">
-  {% block footer %}{% endblock %}
+  {% block footer %}
+
+  {% endblock %}
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

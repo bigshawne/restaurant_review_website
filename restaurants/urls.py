@@ -7,5 +7,5 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url('accounts/', include('allauth.urls')),
     url('accounts/', include('myaccount.urls')),
-    url('restaurantsReviews/', include('restaurantsReviews.urls'))
+    url('restaurantsReviews/', include('restaurantsReviews.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
