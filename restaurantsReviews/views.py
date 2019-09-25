@@ -1,8 +1,10 @@
+import json
+from django.db.models import Q
 from django.views.generic import DetailView, ListView, UpdateView
 from django.views.generic.edit import CreateView
 from .forms import RestaurantForm, DishForm
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .models import Restaurant, RestaurantReview, Dish
 
@@ -73,4 +75,23 @@ def review_create(request, pk):
     review.save()
     return HttpResponseRedirect(reverse('restaurantsReviews:restaurant_detail', args=[pk]))
 
+
+def restaurant_search(request):
+    q = request.GET.get('q', None)
+    if q:
+        queryset = Restaurant.objects.filter(Q(name__contains=q))
+        context = {'latest_restaurant_list': queryset}
+        return render(request, 'restaurantsReviews/restaurant_search.html', context=context)
+    return render(request, 'restaurantsReviews/restaurant_search.html')
+
+
+def restaurant_ajax_research(request):
+    q = request.GET.get('q', None)
+    if q:
+        restaurant_list = Restaurant.objects.filter(Q(name__contains=q))
+        data = []
+        for restaurant in restaurant_list:
+            data.append({"name": restaurant.name})
+        json_data = json.dumps(data)
+        return HttpResponse(json_data)
 

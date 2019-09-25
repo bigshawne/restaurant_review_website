@@ -24,6 +24,12 @@
  </div>
 
  <div class="collapse navbar-collapse ex1" id="myNavbar">
+    <ul class="nav navbar-nav navbar-light">
+        <a href="{% url 'restaurantsReviews:restaurant_search' %}">
+            <span class="glyphicon glyphicon-search"></span>
+            Search Restaurants
+        </a>
+    </ul>
      <ul class="nav navbar-nav navbar-right">
          {% if request.user.is_authenticated %}
              <li class="dropdown">

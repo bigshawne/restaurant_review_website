@@ -1,0 +1,71 @@
+{% extends 'restaurantsReviews/base.html' %}
+
+{% block content %}
+<h3>Search</h3>
+
+    <form action="" role="search" method="get">
+    {% csrf_token %}
+    <div class="input-group col-md-12">
+        <input type="text" name="q" id="q" class="form-control" placeholder="Search name for restaurants">
+        <span class="input-group-btn">
+            <button class="btn btn-default form-control" type="submit" value="search">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+    </form>
+
+    <br>
+
+    <table clas="table table-striped" id="result">
+    {% if latest_restaurant_list %}
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for restaurant in latest_restaurant_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'restaurantsReviews:restaurant_detail' restaurant.id %}">
+                    {{ restaurant.name }}
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    {% endif %}
+    </table>
+{% endblock %}
+
+{% block js %}
+    <script>
+    $("#q").bind('input propertychange', function() {
+        var q = $(this).val();
+        
+        $.ajax({
+            url:'/restaurantsReviews/ajax/search',
+            data: {
+                'q': q,
+            },
+            type: 'GET',
+            dataType: 'json',
+            sccess:function (data) {
+                var content='<thead><tr>'+
+                        '<th>Restaurant</th>'+
+                        '</tr></thead><tbody>';
+                $.each(data, function (i, item) {
+                    content=content+
+                            '<tr><td>'+
+                            item['name']+
+                            '</td><tr>'
+                });
+                content = content + "</tbody>"
+                $('#reslt').html(content)
+            },
+        });
+    };
+    </script>
+{% endblock %}
