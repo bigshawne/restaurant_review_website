@@ -20,4 +20,6 @@ urlpatterns = [
     re_path(r'^restaurant/(?P<pkr>\d+)/dishes/(?P<pk>\d+)/$', views.DishDetail.as_view(), name='dish_detail'),
     # Create reviews
     re_path(r'^restaurant/(?P<pk>\d+)/reviews/create/$', views.review_create, name='review_create'),
+    # Restaurant Search
+    path()
 ]
