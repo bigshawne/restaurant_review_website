@@ -62,10 +62,10 @@ class DishEdit(UpdateView):
 
 
 def review_create(request, pk):
-    restaurant = get_object_or_404(request, pk=pk)
+    restaurant = get_object_or_404(Restaurant, pk=pk)
     review = RestaurantReview(
         rating=request.POST['rating'],
-        comment=request.POST['comment'],
+        comment=request.POST['review'],
         user=request.user,
         restaurant=restaurant
     )

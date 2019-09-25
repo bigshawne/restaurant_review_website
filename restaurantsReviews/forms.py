@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, URLInput, ClearableFileInput
+from django.forms import ModelForm, TextInput, URLInput, ClearableFileInput, NumberInput
 from .models import Restaurant, Dish
 
 
@@ -30,7 +30,7 @@ class DishForm(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'description': TextInput(attrs={'class': 'form-control'}),
-            'price': TextInput(attrs={'class': 'form-control'}),
+            'price': NumberInput(attrs={'class': 'form-control'}),
             'image': ClearableFileInput(attrs={'class': 'form-control'}),
         }
 

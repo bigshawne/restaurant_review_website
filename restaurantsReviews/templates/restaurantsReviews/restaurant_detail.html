@@ -8,12 +8,18 @@
         {% endif %}
     </h3>
 
-    <h4>Address</h4>
+    <h5 style="margin-left: 40px">Address</h5>
+    <p style="margin-left: 60px">{{ restaurant.address }}</p>
+    <h5 style="margin-left: 40px">Phone</h5>
+    <p style="margin-left: 60px">{{ restaurant.phone }}</p>
+    <h5 style="margin-left: 40px">Website</h5>
+    {% if restaurant.url %}
+        <a style="margin-left: 60px" href = {{ restaurant.url }}>{{ restaurant.url }}</a>
+    {% else %}
+        <p style="margin-left: 60px">This restaurant hasn't add website</p>
+    {% endif %}
 
-    <p>
-        {{ restaurant.address }}, <br>
-        {{ restaurant.phone }}
-    </p>
+    <br>
 
     <h4>Menu
         {% if request.user.is_authenticated %}
@@ -32,22 +38,24 @@
 
     </ul>
 
+    <br>
+
     <h4>Comments</h4>
-    {% if restaurant.Review.all %}
-        {% for review in restaurant.Review.all %}
-            <p>{{ Review.rating }} Star, {{ Review.user }} said, {{ Review.date | date:"Y-m-d" }}</p>
+    {% if restaurant.review.all %}
+        {% for review in restaurant.review.all %}
+            <p>{{ review.rating }} Star, {{ review.user }} said, {{ review.date | date:"Y-m-d" }}</p>
+            <p style="margin-left: 40px"> {{ review.comment }}</p>
         {% endfor %}
     {% else %}
-        <p>There is no comment to this restaurant yet.</p>
+        <p style="margin-left: 40px">There is no comment to this restaurant yet.</p>
     {% endif %}
 
-    <h4>Add Comment</h4>
+    <h5>Add Comment</h5>
     {% if request.user.is_authenticated %}
         <form action="{% url 'restaurantsReviews:review_create' restaurant.id %}" method="post">
             {% csrf_token %}
-            <p>Comment</p>
-                <textarea name="'comment" id="comment"></textarea>
-            <p>Rating
+                <textarea name="review" id="comment"></textarea>
+            <p>Rating <br>
                 {% for rate in RATING_CHOICE %}
                     <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" />
                     <label for="choice{{ forloop.counter }}">{{ rate.0 }} Star</label>
