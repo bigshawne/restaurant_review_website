@@ -1,8 +1,8 @@
 # restaurant_review_website
 This is a restaurant review website developed by django framework.
-1. User login/pout, register and profile management:
-  i. Use the django-allauth application to implement the User login/out, register. Combine the email app built in django and allauth to implement the verification email sending and check if the email address is verified.
-  ii. Expand the profile app built in Chicago that customize the user information, and update password.
+1. User login/pout, register and profile management:\\
+  i. Use the django-allauth application to implement the User login/out, register. Combine the email app built in django and allauth to implement the verification email sending and check if the email address is verified.\\
+  ii. Expand the profile app built in Chicago that customize the user information, and update password.\\
 
 2. Use the PostgreSQL as the database to store the users information.
 3. There are eight main functions of this website
