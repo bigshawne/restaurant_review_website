@@ -14,13 +14,20 @@ This is a restaurant review website developed by django framework.
   i. Browse all resturants. (All users)
   
   ii. Check the detail of all resturants (Name, Address, Web, Menu, Rating, and Comments) (All users)
+  
   iii. Create resturant (Only for logged in users)
+  
   iv. Edit resturants (Only for logged in owner)
+  
   v. Add dishes (Price, Description, Photo) (Only for logged in user)
+  
   vi. Edit dishes (Only for logged in owner)
+  
   vii. Check the details of all dishes (All users)
+  
   viii. Rate and comment the resturant (Logged in users)
+  
   iv. Search the resturant with key words. (All users)
   
  * The real-time search function is powered by Ajax
- ** The front-end is developed under HTML5 standard and decorated by Bootstrap4
+ * The front-end is developed under HTML5 standard and decorated by Bootstrap4
